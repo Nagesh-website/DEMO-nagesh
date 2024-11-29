@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Calculator</title>
+</head>
+<body>
+    <div id="main">
+        <input type="text" id="inp" onclick="inp()">
+        <button onclick="addInput('%')">%</button>
+        <button onclick="clearEntry()">CE</button>
+        <button onclick="clearAll()">C</button>
+        <button onclick="backspace()">&#9003;</button>
+        <button onclick="addInput('7')">7</button>
+        <button onclick="addInput('8')">8</button>
+        <button onclick="addInput('9')">9</button>
+        <button onclick="addInput('/')">/</button>
+        <button onclick="addInput('4')">4</button>
+        <button onclick="addInput('5')">5</button>
+        <button onclick="addInput('6')">6</button>
+        <button onclick="addInput('*')">*</button>
+        <button onclick="addInput('1')">1</button>
+        <button onclick="addInput('2')">2</button>
+        <button onclick="addInput('3')">3</button>
+        <button onclick="addInput('-')">-</button>
+        <button onclick="addInput('0')">0</button>
+        <button onclick="addInput('00')">00</button>
+        <button onclick="addInput('.')">.</button>
+        <button onclick="addInput('+')">+</button>
+        <button onclick="calculate()">=</button>
+    </div>
+
+    <script>
+        // Style the main container
+        let main = document.getElementById("main");
+        main.style.border = "2px solid black";
+        main.style.height = "auto";
+        main.style.width = "220px";
+        main.style.padding = "10px";
+
+        // Style the input field
+        let input = document.getElementById("inp");
+        input.style.border = "2px solid black";
+        input.style.height = "50px";
+        input.style.width = "100%";
+        input.style.textAlign = "left";
+        input.style.marginBottom = "10px";
+        input.style.fontSize = "18px";
+
+        // Select all buttons and apply styles
+        const buttons = document.querySelectorAll("#main button");
+        buttons.forEach(button => {
+            button.style.height = "40px";
+            button.style.width = "40px";
+            button.style.margin = "5px";
+            button.style.fontSize = "16px";
+            button.style.cursor = "pointer";
+        });
+        function addInput(value) {
+            input.value += value;
+        }
+
+        // Clear the entire input
+        function clearAll() {
+            input.value = '';
+        }
+
+        // Clear the last entry
+        function clearEntry() {
+            let entries = input.value.split(/[-+*/%]/);
+            input.value = input.value.slice(0, -entries[entries.length - 1].length);
+        }
+
+        // Backspace function
+        function backspace() {
+            input.value = input.value.slice(0, -1);
+        }
+
+        // Calculate the result
+        function calculate() {
+            try {
+                // Evaluate the expression safely
+                input.value = eval(input.value);
+            } catch (error) {
+                input.value = 'Error';
+            }
+        }
+
+       
+    </script>
+</body>
+</html>
